@@ -55,4 +55,5 @@ AddEventHandler('idev_keys:check', function()
 
     Entity(vehicle).state.isLocked = isLocked
     TriggerClientEvent('idev_keys:anim:vehicle', source)
+    -- Does animations are synced like that (i don't think so?)
 end)

@@ -79,12 +79,10 @@ end
     Command: "keys" - Triggers a server event to check the player's key ownership.
     Only players who own a key can execute the command.
 ]]
-RegisterKeyMapping("keys", "Vehicle Key", "keyboard", "x")
+RegisterKeyMapping("keys", "Vehicle Key", "keyboard", IDEV.Keys.ControlKey)
 
 RegisterCommand("keys", function()
-    if not doesPlayerOwnAKey() then
-        return
-    end
+    if not doesPlayerOwnAKey() then return end
 
     TriggerServerEvent("idev_keys:check")
 end, false)
@@ -97,9 +95,7 @@ end, false)
 ]]
 RegisterNetEvent('idev_keys:anim:vehicle', function()
     local closestVehicle, distance = ESX.Game.GetClosestVehicle(cache.coords)
-    if (distance > IDEV.Keys.MaxDistance) then
-        return
-    end
+    if (distance > IDEV.Keys.MaxDistance) then return end
 
     local vehicleState = Entity(closestVehicle).state
     if (IDEV.Keys.EnableKeyAnimationOutside) then
@@ -108,11 +104,9 @@ RegisterNetEvent('idev_keys:anim:vehicle', function()
     if (IDEV.Keys.EnableLightAnimationOutside) then
         activateVehicleLightAnimation(closestVehicle)
     end
-
-    if vehicleState.isLocked then
+    
+    if (vehicleState.isLocked) then
         PlayVehicleDoorCloseSound(closestVehicle, 0)
-        displayNotification(true)
-    else
-        displayNotification(false)
     end
+    displayNotification(vehicleState.isLocked)
 end)

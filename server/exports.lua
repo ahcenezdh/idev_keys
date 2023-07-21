@@ -3,12 +3,7 @@ local function PrintErrorMessage(message, functionName)
     return false
 end
 
-local function IsVehicleInDatabase(plate)
-    local response <const> = MySQL.query.await("SELECT `owner` FROM `owned_vehicles` WHERE `plate` = ?", {plate})
-    return next(response)
-end
-
-local function AddKeyToPlayerInternal(identifier, target, count, checkDatabase)
+local function AddKeyToPlayerInternal(identifier, target, count)
     local metadata <const> = { plate = identifier }
     local canAddKey <const> = Inventory:CanCarryItem(target, 'keys', count, metadata, true)
     
@@ -16,11 +11,6 @@ local function AddKeyToPlayerInternal(identifier, target, count, checkDatabase)
         return PrintErrorMessage("The player does not have enough space in their inventory", "AddKeyToPlayerInternal")
     end
     
-    if (checkDatabase) then
-        if not (IsVehicleInDatabase(identifier)) then
-            return PrintErrorMessage("The vehicle does not exist in the database (owned_vehicles)", "AddKeyToPlayerInternal")
-        end
-    end
     
     local success <const>, response <const> = Inventory:AddItem(target, 'keys', count, metadata, true)
     
@@ -46,9 +36,9 @@ function AddKeyToPlayerFromVehicle(vehicle, target, count)
     return AddKeyToPlayerInternal(plate, target, count)
 end
 
-function AddKeyToPlayerWithoutVehicle(plate, target, count, checkInDatabase)
+function AddKeyToPlayerWithoutVehicle(plate, target, count)
     plate = TrimString(plate)
-    return AddKeyToPlayerInternal(plate, target, count, checkInDatabase)
+    return AddKeyToPlayerInternal(plate, target, count)
 end
 
 --[[
@@ -70,9 +60,10 @@ function RemoveKeysFromPlayersInternal(identifier)
         local removeSuccess, response = Inventory:RemoveItem(player, 'keys', keyCount, metadata, true)
         
         if not (removeSuccess) then
-            print("Error removing the key from the player", "RemoveKeysFromPlayers")
+            PrintErrorMessage("Error removing the key from the player", "RemoveKeysFromPlayers")
             print(response)
             success = false
+            break
         end
     end
     
@@ -81,8 +72,7 @@ end
 
 function RemoveKeysFromPlayersFromVehicle(vehicle)
     if not (DoesEntityExist(vehicle)) then
-        print("The vehicle does not exist", "RemoveKeysFromPlayersFromVehicle")
-        return false
+        return PrintErrorMessage("The vehicle does not exist", "RemoveKeysFromPlayersFromVehicle")
     end
     
     local plate <const> = TrimString(GetVehicleNumberPlateText(vehicle))
