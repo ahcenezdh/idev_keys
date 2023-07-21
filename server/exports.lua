@@ -66,7 +66,6 @@ function RemoveKeysFromPlayersInternal(identifier)
             PrintErrorMessage("Error removing the key from the player", "RemoveKeysFromPlayers")
             print(response)
             success = false
-            break
         end
     end
     
