@@ -8,12 +8,12 @@ game        'gta5'
 name         'Keys System'
 author       'iDev & Co'
 version      '0.0.1'
-repository   'none'
-description  'A key system in item for vehicles made with ox_inventory.'
+repository   'https://github.com/idev-co/idev_keys'
+description  'A key system in item for vehicles made for ox_inventory.'
 
 --[[ Manifest ]]--
 dependencies {
-	'/server:5848',
+'/server:5848',
     '/onesync',
 }
 
