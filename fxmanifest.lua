@@ -28,5 +28,6 @@ client_scripts {
 }
 
 server_scripts {
-    'server/keys.lua'
+    'server/keys.lua',
+    'server/exports.lua'
 }
