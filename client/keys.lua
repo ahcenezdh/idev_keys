@@ -31,7 +31,8 @@ local function performKeyFobAnimation()
         RequestModel(modelHash)
     end
 
-    local prop = CreateObject(modelHash, cache.coords.x, cache.coords.y, cache.coords.z, true, true, true)
+    local playerCoords <const> = GetEntityCoords(cache.ped)
+    local prop = CreateObject(modelHash, playerCoords.x, playerCoords.y, playerCoords.z, true, true, true)
     AttachEntityToEntity(prop, cache.ped, GetPedBoneIndex(cache.ped, 57005), 0.14, 0.03, -0.01, 24.0, -152.0, 164.0, true, true, false, false, 1, true)
 
     Wait(1000)
@@ -83,7 +84,7 @@ RegisterKeyMapping("keys", "Vehicle Key", "keyboard", IDEV.Keys.ControlKey)
 
 RegisterCommand("keys", function()
     if not doesPlayerOwnAKey() then return end
-
+    if not (IDEV.Keys.EnableKeyUsageInsideVehicle) and (cache.vehicle) then return end
     TriggerServerEvent("idev_keys:check")
 end, false)
 
@@ -94,19 +95,31 @@ end, false)
     It retrieves the lock state of the vehicle and performs animation and notification accordingly.
 ]]
 RegisterNetEvent('idev_keys:anim:vehicle', function()
-    local closestVehicle, distance = ESX.Game.GetClosestVehicle(cache.coords)
+    if not (IDEV.Keys.EnableKeyUsageInsideVehicle) and (cache.vehicle) then
+        -- Well if this event is executed when EnableKeyUsageInsideVehicle is false and a player is in a vehicle, it's surely a modder who's trying to exploit events.
+        print("Weird?") 
+        return
+    end
+    local closestVehicle <const>, distance <const> = ESX.Game.GetClosestVehicle(cache.coords)
     if (distance > IDEV.Keys.MaxDistance) then return end
 
-    local vehicleState = Entity(closestVehicle).state
+    local vehicleState <const> = Entity(closestVehicle).state
+    
     if (IDEV.Keys.EnableKeyAnimationOutside) then
         CreateThread(performKeyFobAnimation)
     end
     if (IDEV.Keys.EnableLightAnimationOutside) then
         activateVehicleLightAnimation(closestVehicle)
     end
-    
-    if (vehicleState.isLocked) then
-        PlayVehicleDoorCloseSound(closestVehicle, 0)
+
+    if (cache.vehicle) and (IDEV.Keys.EnableLightAnimationInsideVehicle) then
+        activateVehicleLightAnimation(cache.vehicle)
     end
+
+    if (cache.vehicle) and (IDEV.Keys.EnableKeyAnimationInsideVehicle) then
+        CreateThread(performKeyFobAnimation)
+    end
+
+    PlayVehicleDoorCloseSound(closestVehicle, vehicleState.isLocked and 0 or nil)
     displayNotification(vehicleState.isLocked)
 end)

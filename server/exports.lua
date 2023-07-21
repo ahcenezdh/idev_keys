@@ -3,14 +3,17 @@ local function PrintErrorMessage(message, functionName)
     return false
 end
 
-local function AddKeyToPlayerInternal(identifier, target, count)
+local function AddKeyToPlayerInternal(identifier, target, count, blockKey)
     local metadata <const> = { plate = identifier }
     local canAddKey <const> = Inventory:CanCarryItem(target, 'keys', count, metadata, true)
     
     if not (canAddKey) then
         return PrintErrorMessage("The player does not have enough space in their inventory", "AddKeyToPlayerInternal")
     end
-    
+
+    if (blockKey) then
+        --TODO: Block key to be move or drop from the player inventory only for the item with the same metadata
+    end
     
     local success <const>, response <const> = Inventory:AddItem(target, 'keys', count, metadata, true)
     

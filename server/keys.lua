@@ -40,20 +40,18 @@ AddEventHandler('idev_keys:check', function()
 
     local keyItem <const> = Inventory:GetItem(source, 'keys', vehicleMetadata, true)
     if not (keyItem) then
-        return print("Not your vehicle")
+        print("Not your vehicle")
+        return
     end
 
     local doorState <const> = GetVehicleDoorLockStatus(vehicle)
-    local isLocked
-    if (doorState == 0) then
-        SetVehicleDoorsLocked(vehicle, 2)
-        isLocked = true
-    else
-        SetVehicleDoorsLocked(vehicle, 1)
-        isLocked = false
-    end
+    local isLocked <const> = doorState == 0
+    SetVehicleDoorsLocked(vehicle, doorState == 0 and 2 or 1)
 
     Entity(vehicle).state.isLocked = isLocked
     TriggerClientEvent('idev_keys:anim:vehicle', source)
-    -- Does animations are synced like that (i don't think so?)
+    --[[
+        Does animations are synced like that (i don't think so?)
+        Maybe trigger the animation on the scope of the original client (players in the scope of the player who is using the key)
+    ]]
 end)
