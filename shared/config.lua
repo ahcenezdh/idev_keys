@@ -10,7 +10,7 @@ IDEV.Keys = {
     EnableKeyAnimationOutside = true,
 
     -- Whether the player can use the keys inside the vehicle
-    EnableKeyUsageInsideVehicle = true,
+    EnableKeyUsageInsideVehicle = false,
 
     -- (Not recommended) Whether to enable key animation when using the keys inside the vehicle (only works if EnableKeyUsageInsideVehicle is true), the animation is buggy inside the vehicle since it's the same as outside
     EnableKeyAnimationInsideVehicle = false,

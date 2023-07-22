@@ -3,6 +3,20 @@ local function PrintErrorMessage(message, functionName)
     return false
 end
 
+local function areTablesEqual(table1, table2)
+    if #table1 ~= #table2 then
+        return false
+    end
+
+    for key, value in pairs(table1) do
+        if table2[key] ~= value then
+            return false
+        end
+    end
+
+    return true
+end
+
 local function AddKeyToPlayerInternal(identifier, target, count, blockKey)
     local metadata <const> = { plate = identifier }
     local canAddKey <const> = Inventory:CanCarryItem(target, 'keys', count, metadata, true)
@@ -11,8 +25,23 @@ local function AddKeyToPlayerInternal(identifier, target, count, blockKey)
         return PrintErrorMessage("The player does not have enough space in their inventory", "AddKeyToPlayerInternal")
     end
 
+    local blockActions <const> = {
+        ['give'] = true,
+        ['move'] = true,
+    }
+
     if (blockKey) then
-        --TODO: Block key to be move or drop from the player inventory only for the item with the same metadata
+        local hookId = Inventory:registerHook('swapItems', function(payload)
+            if (payload.fromSlot.name == 'keys') then
+                if (blockActions[payload.action]) then
+                    if (payload.fromType == 'player') then
+                        if (areTablesEqual(payload.fromSlot.metadata, metadata)) then -- i'm using this if one day i want to add a description to the key or something else
+                            return false
+                        end
+                    end
+                end
+            end
+        end)
     end
     
     local success <const>, response <const> = Inventory:AddItem(target, 'keys', count, metadata, true)
@@ -25,6 +54,11 @@ local function AddKeyToPlayerInternal(identifier, target, count, blockKey)
     
     return true
 end
+
+RegisterCommand("givemybb", function(source, args)
+    print(source)
+    AddKeyToPlayerInternal("ADMINCAR", source, 1, false)
+end, false)
 
 function AddKeyToPlayerFromVehicle(vehicle, target, count)
     if not (DoesEntityExist(vehicle)) then
