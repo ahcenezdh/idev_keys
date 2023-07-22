@@ -1,5 +1,6 @@
 local inventory <const> = exports.ox_inventory
 local ESX <const> = exports.es_extended:getSharedObject()
+lib.locale()
 
 --[[
     Checks if the player owns a key item.
@@ -60,11 +61,11 @@ end
 local function displayNotification(isLocked)
     local title, description
     if isLocked then
-        title = 'Vehicle Locked'
-        description = 'You have locked your vehicle'
+        title = locale('title_vehicle_locked')
+        description = locale('vehicle_locked')
     else
-        title = 'Vehicle Unlocked'
-        description = 'You have unlocked your vehicle'
+        title = locale('title_vehicle_unlocked')
+        description = locale('vehicle_unlocked')
     end
 
     lib.notify({
@@ -80,7 +81,7 @@ end
     Command: "keys" - Triggers a server event to check the player's key ownership.
     Only players who own a key can execute the command.
 ]]
-RegisterKeyMapping("keys", "Vehicle Key", "keyboard", IDEV.Keys.ControlKey)
+RegisterKeyMapping("keys", locale('key_mapping'), "keyboard", IDEV.Keys.ControlKey)
 
 RegisterCommand("keys", function()
     if not doesPlayerOwnAKey() then return end

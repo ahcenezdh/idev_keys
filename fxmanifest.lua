@@ -13,7 +13,7 @@ description  'A key system in item for vehicles made for ox_inventory.'
 
 --[[ Manifest ]]--
 dependencies {
-'/server:5848',
+    '/server:5848',
     '/onesync',
 }
 
@@ -30,4 +30,8 @@ client_scripts {
 server_scripts {
     'server/keys.lua',
     'server/exports.lua'
+}
+
+files {
+    'locales/*.json' -- to avoid to load other locales than the one you need just replace the * by the locale you need (for example en)
 }

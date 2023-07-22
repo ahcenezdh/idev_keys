@@ -1,7 +1,5 @@
 Inventory = exports.ox_inventory
 local ESX <const> = exports.es_extended:getSharedObject()
-local SetVehicleDoorsLocked <const> = SetVehicleDoorsLocked
-local GetVehicleNumberPlateText <const> = GetVehicleNumberPlateText
 
 --[[
     Removes leading and trailing white spaces from a string.
