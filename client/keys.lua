@@ -1,15 +1,10 @@
 local inventory <const> = exports.ox_inventory
 local ESX <const> = exports.es_extended:getSharedObject()
-lib.locale()
+local player <const> = LocalPlayer.state
 
---[[
-    Checks if the player owns a key item.
-    Returns true if the player has at least one key item, otherwise false.
-    If the player doesn't have any keys in their inventory, we don't need to continue the script.
-]]
-local function doesPlayerOwnAKey()
-    return inventory:GetItemCount('keys', nil, false)
-end
+lib.locale()
+inventory:displayMetadata('plate', 'plaque')
+
 
 --[[
     Performs an animation for using a key fob.
@@ -77,7 +72,8 @@ end
 RegisterKeyMapping("keys", locale('key_mapping'), "keyboard", IDEV.Keys.ControlKey)
 
 RegisterCommand("keys", function()
-    if not doesPlayerOwnAKey() then return end
+    if not (inventory:GetItemCount('keys', nil, false)) then return end
+    if (player.invBusy) or (player.invOpen) then return end
     if not (IDEV.Keys.EnableKeyUsageInsideVehicle) and (cache.vehicle) then return end
     TriggerServerEvent("idev_keys:check")
 end, false)

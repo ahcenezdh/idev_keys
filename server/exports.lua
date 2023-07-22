@@ -20,7 +20,6 @@ end
 local function AddKeyToPlayerInternal(identifier, target, count, blockKey)
     local metadata <const> = { plate = identifier }
     local canAddKey <const> = Inventory:CanCarryItem(target, 'keys', count, metadata, true)
-    
     if not (canAddKey) then
         return PrintErrorMessage("The player does not have enough space in their inventory", "AddKeyToPlayerInternal")
     end
@@ -43,9 +42,9 @@ local function AddKeyToPlayerInternal(identifier, target, count, blockKey)
             end
         end)
     end
-    
-    local success <const>, response <const> = Inventory:AddItem(target, 'keys', count, metadata, true)
-    
+
+    local success <const>, response <const> = Inventory:AddItem(target, 'keys', count, metadata)
+
     if not (success) then
         local returnError <const> = PrintErrorMessage("Error adding the key to the player", "AddKeyToPlayerInternal")
         print(response)
@@ -55,12 +54,7 @@ local function AddKeyToPlayerInternal(identifier, target, count, blockKey)
     return true
 end
 
-RegisterCommand("givemybb", function(source, args)
-    print(source)
-    AddKeyToPlayerInternal("ADMINCAR", source, 1, false)
-end, false)
-
-function AddKeyToPlayerFromVehicle(vehicle, target, count)
+function AddKeyToPlayerFromVehicle(vehicle, target, count, blockKey)
     if not (DoesEntityExist(vehicle)) then
         return PrintErrorMessage("The vehicle does not exist", "AddKeyToPlayerFromVehicle")
     end
@@ -70,12 +64,12 @@ function AddKeyToPlayerFromVehicle(vehicle, target, count)
     end
     
     local plate <const> = TrimString(GetVehicleNumberPlateText(vehicle))
-    return AddKeyToPlayerInternal(plate, target, count)
+    return AddKeyToPlayerInternal(plate, target, count, blockKey)
 end
 
-function AddKeyToPlayerWithoutVehicle(plate, target, count)
+function AddKeyToPlayerWithoutVehicle(plate, target, count, blockKey)
     plate = TrimString(plate)
-    return AddKeyToPlayerInternal(plate, target, count)
+    return AddKeyToPlayerInternal(plate, target, count, blockKey)
 end
 
 --[[
@@ -120,8 +114,8 @@ function RemoveKeysFromPlayersWithoutVehicle(plate)
     return RemoveKeysFromPlayersInternal(plate)
 end
 
+
 --[[
     TODO: Create temporary key (going to delete the key for example after 1 hour)
     TODO: Block key for a specific time (the key will not work during this time)
-    TODO: Block user to give the key or drop it (useful agaisn't people who are trying to duplicate keys)
 ]]
