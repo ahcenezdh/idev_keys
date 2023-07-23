@@ -54,9 +54,8 @@ local function addKeyToPlayerInternal(identifier, target, count, blockKey)
     local success <const>, response <const> = Inventory:AddItem(target, 'keys', count, metadata)
 
     if not (success) then
-        local returnError <const> = PrintErrorMessage("Error adding the key to the player", "addKeyToPlayerInternal")
         print(response)
-        return returnError
+        return PrintErrorMessage("Error adding the key to the player", "addKeyToPlayerInternal")
     end
     
     return true
