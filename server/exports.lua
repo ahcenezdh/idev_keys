@@ -177,7 +177,7 @@ local function removeKeysFromPlayersInternal(identifier)
         local removeSuccess, response = Inventory:RemoveItem(player, 'keys', keyCount, metadata)
         
         if not (removeSuccess) then
-            printErrorMessage('Error removing the key from the player [ID: ' .. player .. ']', 'removeKeysFromPlayers')
+            print('Error removing the key from the player [ID: ' .. player .. ']' ..  'function: removeKeysFromPlayers') -- we don't use printErrorMessage because we don't want to stop the loop
             print(response)
             success = false
         end
