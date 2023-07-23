@@ -12,8 +12,7 @@ ESX.RegisterCommand({'addkeytovehicle'}, 'admin', function(xPlayer, args, showEr
     local player <const> = GetPlayerPed(xPlayer.source)
     local vehicle <const> = GetVehiclePedIsIn(player, false)
     if not (DoesEntityExist(vehicle)) or (vehicle == 0) then
-        addMessage(xPlayer.source, 'error', 'You are not in a vehicle')
-        return
+        return addMessage(xPlayer.source, 'error', 'You are not in a vehicle')
     end
     local success <const> = AddKeyToPlayerFromVehicle(vehicle, xPlayer.source, 1, false)
     if (success) then
@@ -27,8 +26,7 @@ ESX.RegisterCommand({'removekeyfromvehicle'}, 'admin', function(xPlayer, args, s
     local player <const> = GetPlayerPed(xPlayer.source)
     local vehicle <const> = GetVehiclePedIsIn(player, false)
     if not (DoesEntityExist(vehicle)) or (vehicle == 0) then
-        addMessage(xPlayer.source, 'error', 'You are not in a vehicle')
-        return
+        return addMessage(xPlayer.source, 'error', 'You are not in a vehicle')
     end
     local success <const> = RemoveKeyFromPlayerFromVehicle(xPlayer.source, vehicle)
     if (success) then
