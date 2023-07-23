@@ -3,5 +3,11 @@
     "vehicle_locked": "You have locked your vehicle",
     "title_vehicle_unlocked": "Vehicle Unlocked",
     "vehicle_unlocked": "You have unlocked your vehicle",
-    "key_mapping": "Vehicle Key"
+    "plate_tooltip": "Plate",
+    "key_mapping": "Vehicle Key",
+    "command_key_has_been_added": "The key for this vehicle has been added to your inventory",
+    "command_key_not_found": "The key for this vehicle could not be added to your inventory. Please enable Debug in the config and looks in the server console for more information",
+    "command_not_in_a_vehicle": "You are not in a vehicle",
+    "command_key_has_been_removed": "The key for this vehicle has been removed from your inventory",
+    "command_key_cant_be_removed": "The key for this vehicle could not be found/removed from your inventory. Please enable Debug in the config and looks in the server console for more information"
 }

@@ -3,5 +3,11 @@
     "vehicle_locked": "Vous avez verrouillé votre véhicule",
     "title_vehicle_unlocked": "Véhicule déverrouillé",
     "vehicle_unlocked": "Vous avez déverrouillé votre véhicule",
-    "key_mapping": "Clé du véhicule"
+    "plate_tooltip": "Plaque",
+    "key_mapping": "Clé du véhicule",
+    "command_key_has_been_added": "La clé pour ce véhicule a été ajoutée à votre inventaire",
+    "command_key_not_found": "La clé pour ce véhicule n'a pas pu être ajoutée à votre inventaire. Veuillez activer le mode Debug dans la configuration et vérifier la console du serveur pour plus d'informations",
+    "command_not_in_a_vehicle": "Vous n'êtes pas dans un véhicule",
+    "command_key_has_been_removed": "La clé pour ce véhicule a été retirée de votre inventaire",
+    "command_key_cant_be_removed": "La clé pour ce véhicule n'a pas pu être trouvée/supprimée de votre inventaire. Veuillez activer le mode Debug dans la configuration et vérifier la console du serveur pour plus d'informations"
 }

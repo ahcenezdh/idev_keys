@@ -1,15 +1,4 @@
 --[[ 
-    Prints an error message with the given message and function name 
-    and returns false.
-]]
-local function printErrorMessage(message, functionName)
-    if (IDEV.Keys.Debug) then
-        print("idev_keys:", message, "function:", functionName)
-    end
-    return false
-end
-
---[[ 
     Checks if two tables are equal by comparing their keys and values.
     Returns true if they are equal, false otherwise.
 ]]
@@ -40,7 +29,7 @@ local function addKeyToPlayerInternal(identifier, target, count, blockKey)
     local metadata <const> = { plate = identifier }
     local canAddKey <const> = Inventory:CanCarryItem(target, 'keys', count, metadata, true)
     if not (canAddKey) then
-        return printErrorMessage("The player does not have enough space in their inventory", "addKeyToPlayerInternal")
+        return PrintErrorMessage("The player does not have enough space in their inventory", "addKeyToPlayerInternal")
     end
 
     local blockActions <const> = {
@@ -65,7 +54,7 @@ local function addKeyToPlayerInternal(identifier, target, count, blockKey)
     local success <const>, response <const> = Inventory:AddItem(target, 'keys', count, metadata)
 
     if not (success) then
-        local returnError <const> = printErrorMessage("Error adding the key to the player", "addKeyToPlayerInternal")
+        local returnError <const> = PrintErrorMessage("Error adding the key to the player", "addKeyToPlayerInternal")
         print(response)
         return returnError
     end
@@ -84,11 +73,11 @@ end
 ]]
 function AddKeyToPlayerFromVehicle(vehicle, target, count, blockKey)
     if not (DoesEntityExist(vehicle) )then
-        return printErrorMessage("The vehicle does not exist", "AddKeyToPlayerFromVehicle")
+        return PrintErrorMessage("The vehicle does not exist", "AddKeyToPlayerFromVehicle")
     end
     
     if (type(target) ~= "number") then
-        return printErrorMessage("The target is not a number", "AddKeyToPlayerFromVehicle")
+        return PrintErrorMessage("The target is not a number", "AddKeyToPlayerFromVehicle")
     end
     
     local plate <const> = TrimString(GetVehicleNumberPlateText(vehicle))
@@ -120,12 +109,12 @@ local function removeKeyFromPlayerInternal(target, identifier)
     local metadata <const> = { plate = identifier }
     local keyCount <const> = Inventory:GetItemCount(target, 'keys', metadata, true)
     if not (keyCount) or (keyCount <= 0) then
-        return printErrorMessage('The target doesn\'t have any keys with those metadata', 'removeKeyFromPlayerInternal')
+        return PrintErrorMessage('The target doesn\'t have any keys with those metadata', 'removeKeyFromPlayerInternal')
     end
     local removeSuccess <const>, response <const> = Inventory:RemoveItem(target, 'keys', keyCount, metadata)
     if not (removeSuccess) then
         print(response)
-        return printErrorMessage('Error removing the key from the player [ID: ' .. target .. ']', 'removeKeyFromPlayerInternal')
+        return PrintErrorMessage('Error removing the key from the player [ID: ' .. target .. ']', 'removeKeyFromPlayerInternal')
     end
     return true
 end
@@ -139,7 +128,7 @@ end
 ]]
 function RemoveKeyFromPlayerFromVehicle(target, vehicle)
     if not (DoesEntityExist(vehicle)) then
-        return printErrorMessage("The vehicle does not exist", "RemoveKeyFromPlayerFromVehicle")
+        return PrintErrorMessage("The vehicle does not exist", "RemoveKeyFromPlayerFromVehicle")
     end
     
     local plate <const> = TrimString(GetVehicleNumberPlateText(vehicle))
@@ -177,7 +166,7 @@ local function removeKeysFromPlayersInternal(identifier)
         local removeSuccess, response = Inventory:RemoveItem(player, 'keys', keyCount, metadata)
         
         if not (removeSuccess) then
-            print('Error removing the key from the player [ID: ' .. player .. ']' ..  'function: removeKeysFromPlayers') -- we don't use printErrorMessage because we don't want to stop the loop
+            print('Error removing the key from the player [ID: ' .. player .. ']' ..  'function: removeKeysFromPlayers') -- we don't use PrintErrorMessage because we don't want to stop the loop
             print(response)
             success = false
         end
@@ -195,7 +184,7 @@ end
 ]]
 function RemoveKeysFromPlayersFromVehicle(vehicle)
     if not (DoesEntityExist(vehicle)) then
-        return printErrorMessage("The vehicle does not exist", "RemoveKeysFromPlayersFromVehicle")
+        return PrintErrorMessage("The vehicle does not exist", "RemoveKeysFromPlayersFromVehicle")
     end
     
     local plate <const> = TrimString(GetVehicleNumberPlateText(vehicle))

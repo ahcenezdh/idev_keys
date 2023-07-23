@@ -10,6 +10,17 @@ function TrimString(string)
     return string:match("^%s*(.-)%s*$")
 end
 
+--[[ 
+    Prints an error message with the given message and function name 
+    and returns false.
+]]
+function PrintErrorMessage(message, functionName)
+    if (IDEV.Keys.Debug) then
+        print("idev_keys:", message, "function:", functionName)
+    end
+    return false
+end
+
 --[[
     Event handler for checking vehicle key ownership and handling key actions on the server.
     When triggered, it retrieves the closest vehicle to the player and checks its proximity.
@@ -38,7 +49,7 @@ AddEventHandler('idev_keys:check', function()
 
     local keyItem <const> = Inventory:GetItem(source, 'keys', vehicleMetadata, true)
     if not (keyItem) then
-        print("Not your vehicle")
+        PrintErrorMessage('Not your vehicle', 'idev_keys:check')
         return
     end
 

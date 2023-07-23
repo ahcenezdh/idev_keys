@@ -3,7 +3,7 @@ local ESX <const> = exports.es_extended:getSharedObject()
 local player <const> = LocalPlayer.state
 
 lib.locale()
-inventory:displayMetadata('plate', 'plaque')
+inventory:displayMetadata('plate', locale('plate_tooltip'))
 
 
 --[[
