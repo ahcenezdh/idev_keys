@@ -6,6 +6,8 @@ IDEV.Keys = {
 
     ControlKey = 'x', -- Key to use the keys on vehicle, NOTE: if you change this (only if you're already joined your server with the script started), you need to clear your fivem cache (client cache) since controls are cached into FiveM
 
+    Debug = false,
+
     -- Whether to enable key animation and key prop when using the key outside the vehicle
     EnableKeyAnimationOutside = true,
 

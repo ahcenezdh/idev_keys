@@ -1,5 +1,5 @@
 Inventory = exports.ox_inventory
-local ESX <const> = exports.es_extended:getSharedObject()
+ESX = exports.es_extended:getSharedObject()
 
 --[[
     Removes leading and trailing white spaces from a string.

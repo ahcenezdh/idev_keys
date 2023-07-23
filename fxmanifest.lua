@@ -29,7 +29,8 @@ client_scripts {
 
 server_scripts {
     'server/keys.lua',
-    'server/exports.lua'
+    'server/exports.lua',
+    'server/commands.lua'
 }
 
 files {
