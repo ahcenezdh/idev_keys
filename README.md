@@ -1,6 +1,6 @@
 # Vehicle Key System
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![License](https://img.shields.io/badge/license-CC%20BY--NC-lightgrey.svg)
 
 The Vehicle Key System is a project that provides a key-based vehicle access system using the vehicle's license plate as the identifier. It is designed to work with the `ox_lib` and `ox_inventory` dependencies, which are essential for its functionality.
 
