@@ -49,8 +49,7 @@ AddEventHandler('idev_keys:check', function()
 
     local keyItem <const> = Inventory:GetItem(source, 'keys', vehicleMetadata, true)
     if not (keyItem) then
-        PrintErrorMessage('Not your vehicle', 'idev_keys:check')
-        return
+        return PrintErrorMessage('Not your vehicle', 'idev_keys:check')
     end
 
     local doorState <const> = GetVehicleDoorLockStatus(vehicle)
