@@ -108,5 +108,6 @@ RegisterNetEvent('idev_keys:anim:vehicle', function()
     end
     
     PlayVehicleDoorCloseSound(closestVehicle, vehicleState.isLocked and 0 or nil)
+    local doorsSound <const> = vehicleState.isLocked and PlayVehicleDoorCloseSound(closestVehicle, 0) or PlayVehicleDoorOpenSound(closestVehicle, 0)
     displayNotification(vehicleState.isLocked)
 end)
