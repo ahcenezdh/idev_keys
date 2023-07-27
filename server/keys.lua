@@ -16,10 +16,10 @@ end
 ]]
 function PrintErrorMessage(message, functionName)
     if (IDEV.Keys.Debug) then
-        print("idev_keys:", message, "function:", functionName)
+        print(GetCurrentResourceName(), message, "function:", functionName)
     end
-    return false
 end
+
 
 --[[
     Event handler for checking vehicle key ownership and handling key actions on the server.
@@ -32,8 +32,7 @@ end
 ]]
 RegisterServerEvent('idev_keys:check')
 AddEventHandler('idev_keys:check', function()
-    local player <const> = ESX.GetPlayerFromId(source)
-    if not (player) then return end
+    local player <const> = ESX?.GetPlayerFromId(source)
 
     local closestVehicle <const>, distance <const> = ESX.OneSync.GetClosestVehicle(player.getCoords(true))
     if not (closestVehicle) or (distance > IDEV.Keys.MaxDistance) then return end
@@ -48,14 +47,13 @@ AddEventHandler('idev_keys:check', function()
     }
 
     local keyItem <const> = Inventory:GetItem(source, 'keys', vehicleMetadata, true)
-    if not (keyItem) then
+    if (keyItem <= 0) then
         return PrintErrorMessage('Not your vehicle', 'idev_keys:check')
     end
 
     local doorState <const> = GetVehicleDoorLockStatus(vehicle)
-    local isLocked <const> = doorState == 0
-    SetVehicleDoorsLocked(vehicle, doorState == 0 and 2 or 1)
-
+    local isLocked <const> = (doorState == 1) or (doorState == 0) -- based on fivem docs GetVehicleDoorLockStatus should return only 0 when the vehicle is unlocked because of the game who going to sync both state and use 0, however i couldn't get the 0 state so i added it here just in case
+    SetVehicleDoorsLocked(vehicle, isLocked and 2 or 1)
     Entity(vehicle).state.isLocked = isLocked
     TriggerClientEvent('idev_keys:anim:vehicle', source)
     --[[

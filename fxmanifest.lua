@@ -7,7 +7,7 @@ game        'gta5'
 --[[ Resource Information ]]--
 name         'Keys System'
 author       'iDev & Co'
-version      '1.0.0'
+version      '0.0.1'
 repository   'https://github.com/idev-co/idev_keys'
 description  'A key system in item for vehicles made for ox_inventory.'
 

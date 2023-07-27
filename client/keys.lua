@@ -1,6 +1,6 @@
 local inventory <const> = exports.ox_inventory
 local ESX <const> = exports.es_extended:getSharedObject()
-local player <const> = LocalPlayer.state
+local player <const> = LocalPlayer?.state
 
 lib.locale()
 inventory:displayMetadata('plate', locale('plate_tooltip'))
@@ -93,7 +93,7 @@ RegisterNetEvent('idev_keys:anim:vehicle', function()
     local closestVehicle, distance = ESX.Game.GetClosestVehicle(cache.coords)
     if (distance > IDEV.Keys.MaxDistance) then return end
     
-    local vehicleState <const> = Entity(closestVehicle).state
+    local vehicleState <const> = Entity(closestVehicle)?.state
     
     if (IDEV.Keys.EnableKeyAnimationOutside) then
         CreateThread(performKeyFobAnimation)
@@ -107,7 +107,6 @@ RegisterNetEvent('idev_keys:anim:vehicle', function()
         CreateThread(performKeyFobAnimation)
     end
     
-    PlayVehicleDoorCloseSound(closestVehicle, vehicleState.isLocked and 0 or nil)
     local doorsSound <const> = vehicleState.isLocked and PlayVehicleDoorCloseSound(closestVehicle, 0) or PlayVehicleDoorOpenSound(closestVehicle, 0)
     displayNotification(vehicleState.isLocked)
 end)
