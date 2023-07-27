@@ -7,7 +7,7 @@ The Vehicle Key System is a project that provides a key-based vehicle access sys
 ## Features
 
 - Lock and unlock vehicles using a unique key derived from the license plate.
-- Integrates seamlessly with `ox_lib` and `ox_inventory` to ensure smooth performance.
+- Integrates seamlessly with `ESX`, `ox_lib` and `ox_inventory` to ensure smooth performance.
 
 ## Documentation
 
