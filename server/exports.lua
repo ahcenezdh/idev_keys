@@ -41,7 +41,7 @@ local function addKeyToPlayerInternal(identifier, target, count, blockKey)
     local metadata <const> = { plate = checkPlate(identifier) }
     local canAddKey <const> = Inventory:CanCarryItem(target, 'keys', count, metadata, true)
     if not (canAddKey) then
-        PrintErrorMessage("The player does not have enough space in their inventory", "addKeyToPlayerInternal")
+        PrintErrorMessage('The player does not have enough space in their inventory', 'addKeyToPlayerInternal')
         return false
     end
 
@@ -68,7 +68,7 @@ local function addKeyToPlayerInternal(identifier, target, count, blockKey)
 
     if not (success) then
         print(response)
-        PrintErrorMessage("Error adding the key to the player", "addKeyToPlayerInternal")
+        PrintErrorMessage('Error adding the key to the player', 'addKeyToPlayerInternal')
         return false
     end
     
@@ -86,12 +86,12 @@ end
 ]]
 function AddKeyToPlayerFromVehicle(vehicle, target, count, blockKey)
     if not (DoesEntityExist(vehicle) )then
-        PrintErrorMessage("The vehicle does not exist", "AddKeyToPlayerFromVehicle")
+        PrintErrorMessage('The vehicle does not exist', 'AddKeyToPlayerFromVehicle')
         return false
     end
     
-    if (type(target) ~= "number") then
-        PrintErrorMessage("The target is not a number", "AddKeyToPlayerFromVehicle")
+    if (type(target) ~= 'number') then
+        PrintErrorMessage('The target is not a number', 'AddKeyToPlayerFromVehicle')
         return false
     end
     
@@ -144,7 +144,7 @@ end
 ]]
 function RemoveKeyFromPlayerFromVehicle(target, vehicle)
     if not (DoesEntityExist(vehicle)) then
-        PrintErrorMessage("The vehicle does not exist", "RemoveKeyFromPlayerFromVehicle")
+        PrintErrorMessage('The vehicle does not exist', 'RemoveKeyFromPlayerFromVehicle')
         return false
     end
     
@@ -177,7 +177,7 @@ end
 
 function GetKeyCountFromVehicle(vehicle)
     if not (DoesEntityExist(vehicle) or vehicle == 0) then
-        PrintErrorMessage("The vehicle does not exist", "GetKeyCountFromVehicle")
+        PrintErrorMessage('The vehicle does not exist', 'GetKeyCountFromVehicle')
         return false
     end
     
@@ -192,10 +192,12 @@ end
 local function removeKeyFromPlayersInternal(identifier)
     local success = true
     local metadata <const> = {plate = checkPlate(identifier)}
+    local count = 0
     for _, players in ipairs(GetPlayers()) do
-        local keyCount <const> = Inventory:GetItemCount(tonumber(players), 'keys', metadata, true)
+        local keyCount = Inventory:GetItemCount(tonumber(players), 'keys', metadata, true)
         if (keyCount > 0) then
             local removeSuccess <const>, response <const> = Inventory:RemoveItem(tonumber(players), 'keys', keyCount, metadata)
+            count += keyCount
             if not (removeSuccess) then
                 print(response)
                 PrintErrorMessage('Error removing the key from the player [ID: ' .. players .. ']', 'removeKeyFromPlayersInternal')
@@ -203,19 +205,21 @@ local function removeKeyFromPlayersInternal(identifier)
             end
         end
     end
-    return success
+    return success, count
 end
 
 function RemoveKeysFromPlayersFromVehicle(vehicle)
     if not (DoesEntityExist(vehicle) or vehicle == 0) then
-        PrintErrorMessage("The vehicle does not exist", "RemoveKeysFromPlayersFromVehicle")
+        PrintErrorMessage('The vehicle does not exist', 'RemoveKeysFromPlayersFromVehicle')
         return false
     end
     
     local plate <const> = GetVehicleNumberPlateText(vehicle)
-    return removeKeyFromPlayersInternal(plate)
+    local success <const>, keyCount <const> = removeKeyFromPlayersInternal(plate)
+    return success, keyCount, plate
 end
 
 function RemoveKeysFromPlayersFromPlate(plate)
-    return removeKeyFromPlayersInternal(plate)
+    local success <const>, keyCount <const> = removeKeyFromPlayersInternal(plate)
+    return success, keyCount
 end

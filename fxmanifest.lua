@@ -15,6 +15,9 @@ description  'A key system in item for vehicles made for ox_inventory.'
 dependencies {
     '/server:5848',
     '/onesync',
+    'ox_lib',
+    'ox_inventory',
+    'es_extended'
 }
 
 

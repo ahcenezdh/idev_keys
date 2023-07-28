@@ -15,9 +15,8 @@ end
     and returns false.
 ]]
 function PrintErrorMessage(message, functionName)
-    if (IDEV.Keys.Debug) then
-        print(GetCurrentResourceName(), message, "function:", functionName)
-    end
+    if not (IDEV.Keys.Debug) then return end
+    print(GetCurrentResourceName(), message, 'function:', functionName)
 end
 
 
@@ -54,8 +53,8 @@ AddEventHandler('idev_keys:check', function()
     local doorState <const> = GetVehicleDoorLockStatus(vehicle)
     local isLocked <const> = (doorState == 1) or (doorState == 0) -- based on fivem docs GetVehicleDoorLockStatus should return only 0 when the vehicle is unlocked because of the game who going to sync both state and use 0, however i couldn't get the 0 state so i added it here just in case
     SetVehicleDoorsLocked(vehicle, isLocked and 2 or 1)
-    Entity(vehicle).state.isLocked = isLocked
-    TriggerClientEvent('idev_keys:anim:vehicle', source)
+    Entity(vehicle).state?.isLocked = isLocked
+    TriggerClientEvent('idev_keys:anim:vehicle', player.source)
     --[[
         Does animations are synced like that (i don't think so?)
         Maybe trigger the animation on the scope of the original client (players in the scope of the player who is using the key)

@@ -10,16 +10,13 @@ inventory:displayMetadata('plate', locale('plate_tooltip'))
     Performs an animation for using a key fob.
 ]]
 local function performKeyFobAnimation()
-    local animationDict <const> = "anim@mp_player_intmenu@key_fob@"
+    local animationDict <const> = 'anim@mp_player_intmenu@key_fob@'
 
-    while not HasAnimDictLoaded(animationDict) do
-        RequestAnimDict(animationDict)
-        Wait(0)
-    end
+    lib.requestAnimDict(animationDict)
 
-    TaskPlayAnim(cache.ped, animationDict, "fob_click", 3.0, 3.0, -1, 48, 0.0, false, false, false)
+    TaskPlayAnim(cache.ped, animationDict, 'fob_click', 3.0, 3.0, -1, 48, 0.0, false, false, false)
 
-    local modelHash <const> = GetHashKey("lr_prop_carkey_fob")
+    local modelHash <const> = GetHashKey('lr_prop_carkey_fob')
     RequestModel(modelHash)
 
     while not HasModelLoaded(modelHash) do
@@ -69,13 +66,13 @@ end
     Key mapping: "keys" - Binds the action to the "x" key by default on the keyboard.
     Command: "keys" - Triggers a server event to check the player's key ownership.
 ]]
-RegisterKeyMapping("keys", locale('key_mapping'), "keyboard", IDEV.Keys.ControlKey)
+RegisterKeyMapping('keys', locale('key_mapping'), 'keyboard', IDEV.Keys.ControlKey)
 
-RegisterCommand("keys", function()
+RegisterCommand('keys', function()
     if not (inventory:GetItemCount('keys', nil, false)) then return end
     if (player.invBusy) or (player.invOpen) then return end
     if not (IDEV.Keys.EnableKeyUsageInsideVehicle) and (cache.vehicle) then return end
-    TriggerServerEvent("idev_keys:check")
+    TriggerServerEvent('idev_keys:check')
 end, false)
 
 --[[
