@@ -18,7 +18,7 @@ For detailed information on how to use the Vehicle Key System, refer to our [doc
 
 ## Installation
 
-1. Ensure you have the required dependencies, `ox_lib` and `ox_inventory`, installed in your project.
+1. Ensure you have the required dependencies, `ESX`, `ox_lib` and `ox_inventory`, installed in your project.
 
 2. Download release `v1.0.0` from the [releases]()
 
