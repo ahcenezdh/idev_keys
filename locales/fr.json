@@ -1,13 +1,27 @@
 {
-    "title_vehicle_locked": "Véhicule verrouillé",
+    "title_vehicle_locked": "Véhicule Verrouillé",
     "vehicle_locked": "Vous avez verrouillé votre véhicule",
-    "title_vehicle_unlocked": "Véhicule déverrouillé",
+    "title_vehicle_unlocked": "Véhicule Déverrouillé",
     "vehicle_unlocked": "Vous avez déverrouillé votre véhicule",
     "plate_tooltip": "Plaque",
-    "key_mapping": "Clé du véhicule",
-    "command_key_has_been_added": "La clé pour ce véhicule a été ajoutée à votre inventaire",
-    "command_key_not_found": "La clé pour ce véhicule n'a pas pu être ajoutée à votre inventaire. Veuillez activer le mode Debug dans la configuration et vérifier la console du serveur pour plus d'informations",
-    "command_not_in_a_vehicle": "Vous n'êtes pas dans un véhicule",
-    "command_key_has_been_removed": "La clé pour ce véhicule a été retirée de votre inventaire",
-    "command_key_cant_be_removed": "La clé pour ce véhicule n'a pas pu être trouvée/supprimée de votre inventaire. Veuillez activer le mode Debug dans la configuration et vérifier la console du serveur pour plus d'informations"
-}
+    "key_mapping": "Clé du Véhicule",
+    "command_player_not_found": "La cible n'a pas pu être trouvée",
+    "command_help_playerID": "L'ID du joueur cible",
+    "command_addkeytoplayer": "Ajouter une clé pour la voiture dans laquelle se trouve la cible.",
+    "command_removekeytoplayer": "Supprimer toutes les clés pour la voiture dans laquelle se trouve la cible.",
+    "command_removekeytoplayers": "Supprimer toutes les clés pour la voiture dans laquelle se trouve la cible de l'inventaire de tous les joueurs.",
+    "command_getkeycountfromplayer": "Obtenir le nombre de clés présentes dans l'inventaire des joueurs pour la voiture dans laquelle se trouve la cible.",
+    "command_keycount_result_target": "%s clés ont été trouvées dans les inventaires des joueurs",
+    "command_keycount_result_plate": "%s clés ont été trouvées avec la plaque %s dans tous les inventaires des joueurs",
+    "command_keyremove_players": "%s clés ont été retirées avec la plaque %s dans tous les inventaires des joueurs",
+    "command_help_count_add": "Nombre de clés à ajouter.",
+    "command_help_block_key": "Empêche la clé d'être retirée de l'inventaire de la cible. Utilisez '0' pour désactiver et '1' pour activer.",
+    "command_block_key_invalid": "La valeur doit être 0 ou 1",
+    "command_key_has_been_added": "La clé pour le véhicule spécifique a été ajoutée à l'inventaire de la cible",
+    "command_key_not_found": "La clé du véhicule dans lequel se trouvait la cible n'a pas pu être ajoutée/retirée de l'inventaire de la cible. Veuillez activer le mode de débogage (Debug) dans la configuration et consulter la console du serveur pour plus d'informations",
+    "command_not_in_a_vehicle": "La cible n'est pas dans un véhicule",
+    "command_key_has_been_removed": "La clé du véhicule dans lequel se trouvait la cible a été retirée de son inventaire.",
+    "command_plate_help": "La plaque d'immatriculation du véhicule, maximum 8 caractères",
+    "command_error": "Une erreur est survenue avec la commande. Veuillez activer le mode de debug dans la configuration et consulter la console du serveur pour plus d'informations"
+  }
+  
