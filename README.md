@@ -13,6 +13,9 @@ The Vehicle Key System is a project that provides a key-based vehicle access sys
 
 For detailed information on how to use the Vehicle Key System, refer to our [documentation](https://your-documentation-link).
 
+## Discord
+<a href="https://discord.gg/nsyaGNt6jM">iDev & Co</a>
+
 ## Installation
 
 1. Ensure you have the required dependencies, `ox_lib` and `ox_inventory`, installed in your project.
