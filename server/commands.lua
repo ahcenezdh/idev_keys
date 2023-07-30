@@ -52,22 +52,22 @@ end, false, {help = locale('command_removekeytoplayer'), arguments = {
     {name = 'playerId', help = locale('command_help_playerID'), type = 'number'},
 }})
 
-ESX.RegisterCommand({'removeallkeys'}, 'admin', function(xPlayer, args, showError)
-    local player <const> = GetPlayerPed(args.target)
-    local vehicle <const> = GetVehiclePedIsIn(player, false)
-    if not (DoesEntityExist(vehicle)) or (vehicle == 0) then
-        return addMessage(xPlayer.source, 'error', locale('command_not_in_a_vehicle'))
-    end
-    local success <const>, keyCount <const>, plate <const> = RemoveKeysFromPlayersFromVehicle(vehicle)
-    if not (success) then
-        return addMessage(xPlayer.source, 'error', locale('command_key_not_found'))
-    end
-    addMessage(xPlayer.source, 'success', locale('command_keyremove_players'):format(keyCount, plate))
-end, false, {help = locale('command_removekeytoplayers'), arguments = {
-    {name = 'target', help = locale('command_help_playerID'), type = 'number'},
-}})
+-- ESX.RegisterCommand({'removeallkeys'}, 'admin', function(xPlayer, args, showError)
+--     local player <const> = GetPlayerPed(args.target)
+--     local vehicle <const> = GetVehiclePedIsIn(player, false)
+--     if not (DoesEntityExist(vehicle)) or (vehicle == 0) then
+--         return addMessage(xPlayer.source, 'error', locale('command_not_in_a_vehicle'))
+--     end
+--     local success <const>, keyCount <const>, plate <const> = RemoveKeysFromPlayersFromVehicle(vehicle)
+--     if not (success) then
+--         return addMessage(xPlayer.source, 'error', locale('command_key_not_found'))
+--     end
+--     addMessage(xPlayer.source, 'success', locale('command_keyremove_players'):format(keyCount, plate))
+-- end, false, {help = locale('command_removekeytoplayers'), arguments = {
+--     {name = 'plate', help = locale('command_help_playerID'), type = 'string'},
+-- }})
 
-ESX.RegisterCommand({'removeplatekeys'}, 'admin', function(xPlayer, args, showError)
+ESX.RegisterCommand({'removeallkeys'}, 'admin', function(xPlayer, args, showError)
     local success, keyCount <const> = RemoveKeysFromPlayersFromPlate(args.plate)
     if not (success) then
         return addMessage(xPlayer.source, 'error', locale('command_key_not_found'))
@@ -77,25 +77,25 @@ end, false, {help = locale('command_removekeytoplayers'), arguments = {
     {name = 'plate', help = locale('command_plate_help'), type = 'string'},
 }})
 
-ESX.RegisterCommand({'getvehiclekeys'}, 'admin', function(xPlayer, args, showError)
-    local player <const> = GetPlayerPed(args.playerId)
-    if not (player) or not (IsPedAPlayer(player)) then
-        return addMessage(xPlayer.source, 'error', locale('command_player_not_found'))
-    end
-    local vehicle <const> = GetVehiclePedIsIn(player, false)
-    if not (DoesEntityExist(vehicle)) or (vehicle == 0) then
-        return addMessage(xPlayer.source, 'error', locale('command_not_in_a_vehicle'))
-    end
-    local count <const> = GetKeyCountFromVehicle(vehicle)
-    if not (count) then
-        return addMessage(xPlayer.source, 'error', locale('command_error'))
-    end
-    addMessage(xPlayer.source, 'success', locale('command_keycount_result_target'):format(count))
-end, false, {help = locale('command_getkeycountfromplayer'), arguments = {
-    {name = 'playerId', help = locale('command_help_playerID'), type = 'number'},
-}})
+-- ESX.RegisterCommand({'getvehiclekeys'}, 'admin', function(xPlayer, args, showError)
+--     local player <const> = GetPlayerPed(args.playerId)
+--     if not (player) or not (IsPedAPlayer(player)) then
+--         return addMessage(xPlayer.source, 'error', locale('command_player_not_found'))
+--     end
+--     local vehicle <const> = GetVehiclePedIsIn(player, false)
+--     if not (DoesEntityExist(vehicle)) or (vehicle == 0) then
+--         return addMessage(xPlayer.source, 'error', locale('command_not_in_a_vehicle'))
+--     end
+--     local count <const> = GetKeyCountFromVehicle(vehicle)
+--     if not (count) then
+--         return addMessage(xPlayer.source, 'error', locale('command_error'))
+--     end
+--     addMessage(xPlayer.source, 'success', locale('command_keycount_result_target'):format(count))
+-- end, false, {help = locale('command_getkeycountfromplayer'), arguments = {
+--     {name = 'playerId', help = locale('command_help_playerID'), type = 'number'},
+-- }})
 
-ESX.RegisterCommand({'getplatekeys'}, 'admin', function(xPlayer, args, showError)
+ESX.RegisterCommand({'getvehiclekeys'}, 'admin', function(xPlayer, args, showError)
     local count <const> = GetKeyCountFromPlate(args.plate)
     if not (count) then
         return addMessage(xPlayer.source, 'error', locale('command_error'))
