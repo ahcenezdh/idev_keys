@@ -223,3 +223,12 @@ function RemoveKeysFromPlayersFromPlate(plate)
     local success <const>, keyCount <const> = removeKeyFromPlayersInternal(plate)
     return success, keyCount
 end
+
+exports('AddKeyToPlayerFromVehicle', AddKeyToPlayerFromVehicle)
+exports('AddKeyToPlayerWithoutVehicle', AddKeyToPlayerWithoutVehicle)
+exports('RemoveKeyFromPlayerFromVehicle', RemoveKeyFromPlayerFromVehicle)
+exports('RemoveKeyFromPlayerWithoutVehicle', RemoveKeyFromPlayerWithoutVehicle)
+exports('GetKeyCountFromVehicle', GetKeyCountFromVehicle)
+exports('GetKeyCountFromPlate', GetKeyCountFromPlate)
+exports('RemoveKeysFromPlayersFromVehicle', RemoveKeysFromPlayersFromVehicle)
+exports('RemoveKeysFromPlayersFromPlate', RemoveKeysFromPlayersFromPlate)
