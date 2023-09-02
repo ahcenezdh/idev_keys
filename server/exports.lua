@@ -182,17 +182,11 @@ function RemoveKeysFromPlayersFromPlate(plate)
     return success, keyCount
 end
 
-local exportsTable <const> = {
-    AddKeyToPlayerFromVehicle = AddKeyToPlayerFromVehicle,
-    AddKeyToPlayerWithoutVehicle = AddKeyToPlayerWithoutVehicle,
-    RemoveKeyFromPlayerFromVehicle = RemoveKeyFromPlayerFromVehicle,
-    RemoveKeyFromPlayerWithoutVehicle = RemoveKeyFromPlayerWithoutVehicle,
-    GetKeyCountFromVehicle = GetKeyCountFromVehicle,
-    GetKeyCountFromPlate = GetKeyCountFromPlate,
-    RemoveKeysFromPlayersFromVehicle = RemoveKeysFromPlayersFromVehicle,
-    RemoveKeysFromPlayersFromPlate = RemoveKeysFromPlayersFromPlate
-}
-
-for name, func in pairs(exportsTable) do
-    exports(name, func)
-end
+exports('AddKeyToPlayerFromVehicle', AddKeyToPlayerFromVehicle)
+exports('AddKeyToPlayerWithoutVehicle', AddKeyToPlayerWithoutVehicle)
+exports('RemoveKeyFromPlayerFromVehicle', RemoveKeyFromPlayerFromVehicle)
+exports('RemoveKeyFromPlayerWithoutVehicle', RemoveKeyFromPlayerWithoutVehicle)
+exports('GetKeyCountFromVehicle', GetKeyCountFromVehicle)
+exports('GetKeyCountFromPlate', GetKeyCountFromPlate)
+exports('RemoveKeysFromPlayersFromVehicle', RemoveKeysFromPlayersFromVehicle)
+exports('RemoveKeysFromPlayersFromPlate', RemoveKeysFromPlayersFromPlate)
